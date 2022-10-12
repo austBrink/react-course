@@ -47,4 +47,19 @@ In CSS the colon denotes a pseudo selector. :hover. AND we can do `&:hover`
 **DON'T FORGET** about media queries. @media(min-width: 560px) { super special styles }
 ## General
 You should trim your user strings.
-
+## Router 
+This note comes from the react book project.... consider I have an array of posts defined in my component. I also am defining my routes here. 
+Check out these dynamic routes....
+```
+<Route
+    path = '/post:postSlug'
+    element = {(props) => {
+         const post = posts.find(
+             (post) => post.slug === props.match.params.postSlug
+         );
+         return <Post post = {post} />;
+     }}
+/>
+```
+Here's what happens. We'll link to something like /post/hello. _the hello is the slug_
+This route will make this our element... The post that it finds in posts that matches the postSlug. how? The element gets a free props.match and that pertains toyou guessed it. The params in the route.  
