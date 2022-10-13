@@ -1,12 +1,25 @@
-## Notes on dynamic styles.
+# CLASS NOTES
+## General
+You should trim your user strings.
+
 Don't forget you can dynamically style things with the style attribute. While it's nice to have a separation of concerns for styles by putting them in .css, sometimes styles need to be dynamic. Look at this cool example where we are creating a chart...
 ```
 fillHeight = Math.round((props.value / props.maxVal)*100) + '%';
 return(
 <div style = {{height: fillHeight}}></div>
 ```
+## A Word on Previous State 
+When updating state based on values from a previous state, like adding an item to an array, one must use a callback function... 
+```
+setAState((prevAState) => {
+	return [aState, ...prevAState];
+});
+```
+### But why? 
+The answer is because react schedules state. In order to ensure that you are indeed using the previous state snapshot, and not one that has been updated by another state that has been asyncronously executed first despite your intent.
 ## On Styling
 ### A dumb note.
+**DON'T FORGET** about media queries. @media(min-width: 560px) { super special styles }
 Remember one can say.... `className = {'name name1'}` and the selector in css looks like `.name.name1`
 ### Inline Verses Dynamic Class Names
 This was a question I posted. I think The answer I have is go with dynamic css classes unless you can't.
@@ -44,9 +57,6 @@ This is just an example. **Really the question is, to use or not to use inline .
 #### Styled Components
 Haven't seen this before. Tagged template literal. `hello.method```
 In CSS the colon denotes a pseudo selector. :hover. AND we can do `&:hover`
-**DON'T FORGET** about media queries. @media(min-width: 560px) { super special styles }
-## General
-You should trim your user strings.
 ## Router 
 This note comes from the react book project.... consider I have an array of posts defined in my component. I also am defining my routes here. 
 Check out these dynamic routes....
@@ -62,4 +72,6 @@ Check out these dynamic routes....
 />
 ```
 Here's what happens. We'll link to something like /post/hello. _the hello is the slug_
-This route will make this our element... The post that it finds in posts that matches the postSlug. how? The element gets a free props.match and that pertains toyou guessed it. The params in the route.  
+This route will make this our element... The post that it finds in posts that matches the postSlug. how? The element gets a free props.match and that pertains to... you guessed it. The params in the route. 
+## A word on forms
+Turns out that the `onSubmit` in a form element comes with a browser default that refreshes the page due to a request to the page host. **That's why** we use `event.preventDefault();`!  
