@@ -75,3 +75,14 @@ Here's what happens. We'll link to something like /post/hello. _the hello is the
 This route will make this our element... The post that it finds in posts that matches the postSlug. how? The element gets a free props.match and that pertains to... you guessed it. The params in the route. 
 ## A word on forms
 Turns out that the `onSubmit` in a form element comes with a browser default that refreshes the page due to a request to the page host. **That's why** we use `event.preventDefault();`!  
+## A word on the optional chaining operator 
+There's a super cool question mark in js. `this?.aProperty` The `?.` is the chaining operator, at it checks to make sure what preceeds it is defined. Let's say I wanted a nested portion of an object. 
+```
+const nestedItem = obj.firstThing?.secondThing;
+```
+I didn't know this but another easy of doing this is with `&&` so 
+```
+const nestedItem = obj.firstThing && obj.firstThing.secondThing
+```
+[see docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining)
+## Use Ref ... 
