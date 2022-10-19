@@ -86,6 +86,11 @@ const nestedItem = obj.firstThing && obj.firstThing.secondThing
 ```
 [see docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining)
 ## Use Ref ...
+Correct me if I'm wrong but it looks like we can do this ... 
+```
+helloDiv = useRef();
+return <div ref = {helloDiv}>Hello</div>
+```
 ## Use Location ... 
 ## A word on state 
 Never use derived state. A state that depends on another state is is continuously updated by another state value or that shares its values. Keep concerns separate.
