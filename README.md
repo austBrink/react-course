@@ -85,4 +85,8 @@ I didn't know this but another easy of doing this is with `&&` so
 const nestedItem = obj.firstThing && obj.firstThing.secondThing
 ```
 [see docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining)
-## Use Ref ... 
+## Use Ref ...
+## Use Location ... 
+## A word on state 
+Never use derived state. A state that depends on another state is is continuously updated by another state value or that shares its values. Keep concerns separate.
+
