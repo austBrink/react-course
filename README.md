@@ -103,7 +103,7 @@ We can later (in that component) extract that state....
 const location = useLocation()
 const dataIWant = location?.state?.property || null;
 ```
-As I have found the nullish coalescence operator here is very helpful if I want to see some state. LEts suppose all my styles and even api calls depend on if an Id was carried along in state. 
+As I have found the short circuit operator here `|| null` is very helpful if I want to see some state. LEts suppose all my styles and even api calls depend on if an Id was carried along in state. 
 I could then.... 
 ```
 const [ propertyState, setPropertyState ] = useState(dataIWant);
