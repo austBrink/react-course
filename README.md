@@ -84,14 +84,35 @@ I didn't know this but another easy of doing this is with `&&` so
 ```
 const nestedItem = obj.firstThing && obj.firstThing.secondThing
 ```
-[see docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining)
-## Use Ref ...
-Correct me if I'm wrong but it looks like we can do this ... 
+[see docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining) 
+## A word on state 
+Never use derived state. A state that depends on another state is is continuously updated by another state value or that shares its values. Keep concerns separate.
+## A word on hooks
+### useStorageState() 
+### Use Ref ...
+Correct me if I'm wrong but it looks like we can do this ...
 ```
 helloDiv = useRef();
 return <div ref = {helloDiv}>Hello</div>
 ```
-## Use Location ... 
-## A word on state 
-Never use derived state. A state that depends on another state is is continuously updated by another state value or that shares its values. Keep concerns separate.
+### Use Location ...
+Given that a component was linked either with <Link> or with useNaviagte hook and we passed and object along witht he url...
+`<Link to = '/path' state = {{ key: value }} > ...`
+We can later (in that component) extract that state.... 
+```
+const location = useLocation()
+const dataIWant = location?.state?.property || null;
+```
+As I have found the nullish coalescence operator here is very helpful if I want to see some state. LEts suppose all my styles and even api calls depend on if an Id was carried along in state. 
+I could then.... 
+```
+const [ propertyState, setPropertyState ] = useState(dataIWant);
+
+```
+## Use Storage State 
+This looks really good for future projects, although I'd like to write my own....
+```
+const [value, setValue] = useStorageState(<storageToUse>, <storageValName>, <initValue>);
+
+```
 
