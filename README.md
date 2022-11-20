@@ -116,3 +116,48 @@ const [value, setValue] = useStorageState(<storageToUse>, <storageValName>, <ini
 
 ```
 
+## A word on Context
+__Context__ what is it? 
+Context is a means to share state program wide, so that's child to sibling component, or child to parent, or parent to child. It avoids prop drilling. 
+So let's say my program needed information on its user (like their username, and if their logged in). 
+
+### Create a speficic 'instance' of context
+in a separate file like UserContext, You're gonna need to `import { createContext } from "react"`
+(The advantage to a separate file is that you wont need to wrap your context consumers in contect componen).  
+It might then be a god idea to initialize the object you want to be in context, like in state. 
+```
+const init = {user: '', loggedIn: ''};
+```
+And yeah, lets add that to Context... 
+```
+const UserContext = createContext(init);
+```
+One more ting. Don't forget to export this. . . `export default UserContext`
+
+**Cool, you just created some context for a user.**
+
+### Now it would be a good idea to add this to our app. Thats what will do the sharing.... 
+So wrap all the component you want to have access with your UserContext like this 
+(Dont forget to import your UserContext from UserContext.js first...)
+```
+<UserContext.Provider value = {{ user }}>
+.... other components...
+</UserContext.Provider>
+```
+Okay, so maybe the most important part. _how do I get the context data?_ 
+In the file that needs it, you're gonna import it. 
+```
+import React, {useContext} from "react";
+import UserContext from '../context/UserContext;
+```
+And then... not createContext like we used in the UserContext file. We use useContext... 
+```
+const {user} = useContext(UserContext);
+```
+That's about the size of it. Let's recap. 
+1. You need state to be accessible between siblings and from parent to child but you're too lazy to prop drill...
+2. You'll need to create a context file. This should import CreateContext. and export a CreateContext(initValues)
+3. You'll need to import this file into the component that _has_ the item to be shared. This is your context provider.
+ Great, now you'll wrap the components that need access to this var with <YourContextYouExported.Provider value = {stuffNeeded}> ...
+4. Now you need to grab your context. In this file you need it, import useContext from react along with your context file. 
+5. Deconstruct the data you need from context value.... `const {stuffNeededByName} = useContext(MyContextFile);`     
